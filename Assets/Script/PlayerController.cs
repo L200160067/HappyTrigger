@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         isJumping = false;
         isGrounded = true;
-        jumpForce = 60f;
+        jumpForce = 6f;
         moveSpeed = 5f;
         score = 0;
         health = 3;
