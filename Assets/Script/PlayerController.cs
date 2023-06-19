@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isJumping, isGrounded;
     [SerializeField]
-    private float jumpForce, moveSpeed;
+    private float jumpForce = 20f, moveSpeed = 5f;
     [SerializeField]
-    private int score, health;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +19,6 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
-
-        jumpForce = 15f;
-        moveSpeed = 5f;
-        score = 0;
-        health = 3;
     }
 
     // Update is called once per frame
@@ -44,33 +39,13 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            // isJumping = true;
-            // isGrounded = false;
         }
 
-        isJumping = rb2D.velocity.y > 0 && !isGrounded;
-        // if (rb2D.velocity.y > 0)
-        // {
-        //     isJumping = true;
-        // }
-        // else
-        // {
-        //     isJumping = false;
-        // }
+        isJumping = rb2D.velocity.y > 0 && !isGrounded; // return boolean untuk isJumping
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // if (collision.gameObject.CompareTag("Ground"))
-        // {
-        //     isJumping = false;
-        //     isGrounded = true;
-        // }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(1);
-        }
 
         if (collision.gameObject.CompareTag("Item"))
         {
@@ -92,7 +67,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        isGrounded = !other.gameObject.CompareTag("Ground");
+        if (other.gameObject.CompareTag("Ground") == true)
+        {
+            isGrounded = false;
+        }
     }
 
 
@@ -104,17 +82,8 @@ public class PlayerController : MonoBehaviour
         Destroy(item);
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
 
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
+    public void Die()
     {
         Debug.Log("Player has died!");
     }
