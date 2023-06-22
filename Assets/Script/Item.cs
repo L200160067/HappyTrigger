@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int scoreValue = 1;
+    public int scoreValue = 1; // nilai score item yg didapat
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
