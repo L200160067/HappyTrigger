@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int damage = 1;
+
+    public int damage = 1, health = 10;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,5 +16,10 @@ public class Enemy : MonoBehaviour
                 playerHealth.TakeDamage(damage);
             }
         }
+    }
+
+    void Attack()
+    {
+
     }
 }
