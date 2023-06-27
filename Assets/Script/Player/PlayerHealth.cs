@@ -45,11 +45,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, float knockback = 0)
     {
         health -= damage;
         anim.SetTrigger("hurt");
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1f), ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(knockback, 5f), ForceMode2D.Impulse);
 
     }
 }

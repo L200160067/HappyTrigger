@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     PlayerHealth playerHealth;
     [SerializeField]
-    private bool isJumping, isAttacking, isGrounded;
+    public bool isJumping, isAttacking, isGrounded;
+    [NonSerialized] public bool isLookRight;
+    [NonSerialized] float moveHorizontal;
     [SerializeField]
-    private float jumpForce = 20f, moveSpeed = 5f;
+    private float jumpForce = 20f, moveSpeed = 5f, knockbackPower = 5f;
     [SerializeField]
-    private int score;
+    private int attackPower = 10, defense, score;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
+
+        transform.localScale = new Vector2(2, 2);
+
     }
 
     // Update is called once per frame
@@ -42,17 +47,19 @@ public class PlayerController : MonoBehaviour
 
     void Run()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
+        moveHorizontal = isAttacking ? 0 : Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(moveHorizontal * moveSpeed, rb2D.velocity.y);
 
         anim.SetBool("isRun", moveHorizontal != 0 && !isJumping && isGrounded ? true : false);
         if (moveHorizontal > 0)
         {
-            transform.localScale = new Vector2(2, 2);
+            transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
+            knockbackPower = knockbackPower < 0 ? -knockbackPower : knockbackPower;
         }
         else if (moveHorizontal < 0)
         {
-            transform.localScale = new Vector2(-2, 2);
+            transform.localScale = new Vector2(transform.localScale.x < 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
+            knockbackPower = knockbackPower > 0 ? -knockbackPower : knockbackPower;
         }
     }
 
@@ -76,7 +83,6 @@ public class PlayerController : MonoBehaviour
         }
 
         rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -95,15 +101,17 @@ public class PlayerController : MonoBehaviour
         // }
     }
 
-    /*Ground Check*/
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        isGrounded = other.gameObject.CompareTag("Ground");
+        // damage the enemy
+        if (other.gameObject.CompareTag("Enemy") && isAttacking)
+        {
+            other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
+            Debug.Log("enemy attacked");
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground") == true)
-            isGrounded = false;
     }
 
 

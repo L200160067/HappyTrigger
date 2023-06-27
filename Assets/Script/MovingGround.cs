@@ -10,8 +10,6 @@ public class MovingGround : MonoBehaviour
     private float waitDuration, speed;
     [SerializeField]
     private Transform[] targetDestination;
-    [SerializeField]
-    private bool useWait = false;
     private bool isArrive = false;
     private int i;
 
@@ -37,9 +35,19 @@ public class MovingGround : MonoBehaviour
 
     IEnumerator Move()
     {
+        yield return new WaitForSeconds(waitDuration);
         transform.position = Vector3.MoveTowards(transform.position, targetDestination[i].position, speed * Time.deltaTime);
         yield return new WaitUntil(() => isArrive);
-        yield return new WaitForSeconds(waitDuration);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.position.y + 0.4f > transform.position.y)
+            other.transform.SetParent(transform);
+    }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        other.transform.SetParent(null);
     }
 
 }
