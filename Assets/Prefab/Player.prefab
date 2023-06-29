@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6966302479295938403}
   - component: {fileID: 3773172293463175503}
   - component: {fileID: 2063292300678573226}
-  - component: {fileID: 1478734171558395737}
   - component: {fileID: 6829440183611679459}
+  - component: {fileID: 1478734171558395737}
   - component: {fileID: 7244202629049253458}
   m_Layer: 0
   m_Name: Player
@@ -163,33 +163,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.038820744, y: -0.21425974}
   m_Size: {x: 0.91432095, y: 2.06611}
   m_Direction: 0
---- !u!50 &1478734171558395737
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539225549899715523}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &6829440183611679459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -235,6 +208,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.119895, y: 2.091023}
   m_EdgeRadius: 0
+--- !u!50 &1478734171558395737
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539225549899715523}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!95 &7244202629049253458
 Animator:
   serializedVersion: 5
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 4125297501657876626}
   - component: {fileID: 4051664476680604815}
   - component: {fileID: 946345287376509516}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

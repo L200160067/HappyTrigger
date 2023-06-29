@@ -28,7 +28,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            enemy.playerDetected = false;
+            // enemy.playerDetected = false;
         }
     }
 }

@@ -35,31 +35,32 @@ public class Enemy : MonoBehaviour
     {
 
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("attack");
+        isCD = attackCD > 0;
         if (!isCD)
         {
             attackCD = Cooldown;
             anim.SetTrigger("attack");
-            isCD = true;
         }
         if (!isAttacking)
         {
             if (attackCD >= 0)
             {
-                attackCD = attackCD - Time.deltaTime;
+                setCooldown();
             }
-            else
-            {
-                isCD = false;
-            }
-            Debug.Log("Cooldown: " + attackCD);
+        }
+        void setCooldown()
+        {
+            attackCD = attackCD - Time.deltaTime;
         }
     }
 
     void Move()
     {
+        float playerDistanceX = Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(target.position.x, 0));
+        float playerDistanceY = Vector2.Distance(new Vector2(0, transform.position.y), new Vector2(0, target.position.y));
         if (FindObjectOfType<PlayerHealth>().isAlive)
         {
-            if (playerDetected && Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(target.position.x, 0)) > 3)
+            if (playerDetected && playerDistanceX > 3)
             {
                 anim.SetBool("isMoving", true);
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
@@ -72,7 +73,7 @@ public class Enemy : MonoBehaviour
                     transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
                 }
             }
-            else if (!(Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(target.position.x, 0)) > 3.5f))
+            else if (playerDistanceX < 3.5f && playerDistanceY < 3f)
             {
                 Attack();
                 anim.SetBool("isMoving", false);
@@ -81,20 +82,23 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("isMoving", false);
             }
+            if (Vector2.Distance(transform.position, target.position) > 100 && playerDetected)
+            {
+                playerDetected = false;
+            }
         }
     }
 
     void Die()
     {
-        Destroy(gameObject, 1);
+        Destroy(gameObject);
     }
 
     public void TakeDamage(int damage, float knockback = 0)
     {
         health -= damage;
         // anim.SetTrigger("hurt");
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(knockback, 2f), ForceMode2D.Impulse);
-
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(knockback, 4f), ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

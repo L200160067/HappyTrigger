@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb2D;
+    [NonSerialized]
+    public Rigidbody2D rb2D;
     Animator anim;
     PlayerHealth playerHealth;
     [SerializeField]
@@ -25,8 +26,6 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
-
-        transform.localScale = new Vector2(2, 2);
 
     }
 
@@ -104,10 +103,10 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // damage the enemy
-        if (other.gameObject.CompareTag("Enemy") && isAttacking)
+        if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
-            Debug.Log("enemy attacked");
+            Debug.Log("Enemy get damage");
         }
     }
     private void OnTriggerExit2D(Collider2D other)

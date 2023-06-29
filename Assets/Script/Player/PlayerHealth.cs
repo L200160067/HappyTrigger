@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    PlayerController playerController;
+    PlayerController player;
     Animator anim;
     public bool isAlive = true;
     public int health = 100;
@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        player = GetComponent<PlayerController>();
         anim = GetComponent<Animator>();
     }
 
@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         anim.SetTrigger("hurt");
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(knockback, 5f), ForceMode2D.Impulse);
+        player.rb2D.AddForce(new Vector2(knockback, 5f), ForceMode2D.Impulse);
 
     }
 }
