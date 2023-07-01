@@ -7,16 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     [NonSerialized]
     public Rigidbody2D rb2D;
+    public GameObject container;
     Animator anim;
     PlayerHealth playerHealth;
-    [SerializeField]
     public bool isJumping, isAttacking, isGrounded;
-    [NonSerialized] public bool isLookRight;
     [NonSerialized] float moveHorizontal;
-    [SerializeField]
-    private float jumpForce = 20f, moveSpeed = 5f, knockbackPower = 5f;
-    [SerializeField]
-    private int attackPower = 10, defense, score;
+    public float jumpForce = 20f, moveSpeed = 5f, skillSpeed = 5f, knockbackPower = 5f;
+    public int attackPower = 10, defense, score;
 
     // Start is called before the first frame update
     void Start()
@@ -46,16 +43,16 @@ public class PlayerController : MonoBehaviour
 
     void Run()
     {
-        moveHorizontal = isAttacking ? 0 : Input.GetAxis("Horizontal");
+        moveHorizontal = isAttacking ? 0 : Input.GetAxis("Horizontal"); // prevent player to flip while attacking
         rb2D.velocity = new Vector2(moveHorizontal * moveSpeed, rb2D.velocity.y);
 
         anim.SetBool("isRun", moveHorizontal != 0 && !isJumping && isGrounded ? true : false);
-        if (moveHorizontal > 0)
+        if (moveHorizontal > 0) // flip right
         {
             transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
             knockbackPower = knockbackPower < 0 ? -knockbackPower : knockbackPower;
         }
-        else if (moveHorizontal < 0)
+        else if (moveHorizontal < 0) // flip left
         {
             transform.localScale = new Vector2(transform.localScale.x < 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
             knockbackPower = knockbackPower > 0 ? -knockbackPower : knockbackPower;
@@ -75,13 +72,36 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack");
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && isGrounded)
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("Skill");
+        if (!isAttacking && isGrounded)
         {
-            anim.SetTrigger("attack");
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                anim.SetTrigger("attack"); // normal attack
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                anim.SetTrigger("skill"); // launch skill
+            }
         }
 
         rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
+    }
+    void Skill(GameObject magicSkill) // method for Animation Event
+    {
+        if (!magicSkill.GetComponent<Skill>())
+        {
+            magicSkill.AddComponent<Skill>();
+        }
+        if (transform.localScale.x > 0)
+        {
+            Instantiate(magicSkill, new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z), Quaternion.identity, container != null ? container.transform : null);
+        }
+        else if (transform.localScale.x < 0)
+        {
+            Instantiate(magicSkill, new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z), Quaternion.identity, container != null ? container.transform : null);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

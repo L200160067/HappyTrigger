@@ -38,7 +38,7 @@ Transform:
   - {fileID: 7214430842527653338}
   - {fileID: 4588825214934757332}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5206481164782481649
 SpriteRenderer:
@@ -119,11 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab3040f2729ce44989bfb0af7057b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  container: {fileID: 0}
   isJumping: 0
   isAttacking: 0
   isGrounded: 0
   jumpForce: 20
   moveSpeed: 14
+  skillSpeed: 5
   knockbackPower: 5
   attackPower: 10
   defense: 0
