@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        Cooldown = attackCD;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim = GetComponent<Animator>();
     }
@@ -35,23 +34,22 @@ public class Enemy : MonoBehaviour
     {
 
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("attack");
-        isCD = attackCD > 0;
+        isCD = Cooldown > 0;
         if (!isCD)
         {
-            attackCD = Cooldown;
+            Cooldown = attackCD;
             anim.SetTrigger("attack");
         }
         if (!isAttacking)
         {
-            if (attackCD >= 0)
-            {
-                setCooldown();
-            }
+            StartCoroutine(AttackCooldown());
         }
-        void setCooldown()
-        {
-            attackCD = attackCD - Time.deltaTime;
-        }
+    }
+    IEnumerator AttackCooldown()
+    {
+        Cooldown = Cooldown - Time.deltaTime;
+        yield return new WaitUntil(() => isCD == false);
+        Cooldown = 0;
     }
 
     void Move()
@@ -82,7 +80,7 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("isMoving", false);
             }
-            if (Vector2.Distance(transform.position, target.position) > 100 && playerDetected)
+            if (Vector2.Distance(transform.position, target.position) > 20 && playerDetected)
             {
                 playerDetected = false;
             }

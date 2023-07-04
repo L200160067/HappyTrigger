@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     PlayerHealth playerHealth;
     public bool isJumping, isAttacking, isGrounded;
-    [NonSerialized] float moveHorizontal;
-    public float jumpForce = 20f, moveSpeed = 5f, skillSpeed = 5f, knockbackPower = 5f;
+    bool isSkillCD;
+    float moveHorizontal, CDSkillContainer;
+    public float jumpForce = 20f, moveSpeed = 5f, knockbackPower = 5f, skillCD = 5f;
     public int attackPower = 10, defense, score;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
 
+        CDSkillContainer = skillCD;
     }
 
     // Update is called once per frame
@@ -79,12 +81,16 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("attack"); // normal attack
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !isSkillCD)
             {
                 anim.SetTrigger("skill"); // launch skill
+                isSkillCD = true;
             }
         }
-
+        if (isSkillCD)
+        {
+            StartCoroutine(SkillCooldown());
+        }
         rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
     }
     void Skill(GameObject magicSkill) // method for Animation Event
@@ -102,6 +108,15 @@ public class PlayerController : MonoBehaviour
             Instantiate(magicSkill, new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z), Quaternion.identity, container != null ? container.transform : null);
         }
 
+    }
+    IEnumerator SkillCooldown()
+    {
+        skillCD = skillCD - Time.deltaTime;
+        yield return new WaitUntil(() => skillCD <= 0);
+        skillCD = CDSkillContainer;
+        yield return null;
+        Debug.Log("Skill not CD");
+        isSkillCD = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
