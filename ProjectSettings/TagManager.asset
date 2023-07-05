@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Item
   - Enemy
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

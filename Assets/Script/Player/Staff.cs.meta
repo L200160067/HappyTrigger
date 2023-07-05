@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: 7ab3040f2729ce44989bfb0af7057b98
+guid: 6f7c9916db33f89409f47f26a2f5b3ab
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - rb2D: {instanceID: 0}
-  - container: {instanceID: 0}
-  - skillCastAt: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [NonSerialized]
     public Rigidbody2D rb2D;
-    public GameObject container;
+    public GameObject container, skillCastAt;
     Animator anim;
     PlayerHealth playerHealth;
     public bool isJumping, isAttacking, isGrounded;
@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.localScale.x > 0)
         {
-            Instantiate(magicSkill, new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z), Quaternion.identity, container != null ? container.transform : null);
+            Instantiate(magicSkill, skillCastAt.transform.position, Quaternion.identity, container != null ? container.transform : null);
         }
         else if (transform.localScale.x < 0)
         {
-            Instantiate(magicSkill, new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z), Quaternion.identity, container != null ? container.transform : null);
+            Instantiate(magicSkill, skillCastAt.transform.position, Quaternion.identity, container != null ? container.transform : null);
         }
 
     }
@@ -138,11 +138,11 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // damage the enemy
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
-            Debug.Log("Enemy get damage");
-        }
+        // if (other.gameObject.CompareTag("Enemy"))
+        // {
+        //     other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
+        //     Debug.Log("Enemy get damage");
+        // }
     }
     private void OnTriggerExit2D(Collider2D other)
     {

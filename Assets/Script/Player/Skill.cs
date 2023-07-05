@@ -10,6 +10,7 @@ public class Skill : MonoBehaviour
     Vector2 initialPosition;
     [NonSerialized]
     public bool flipRight;
+    public float speed = 15f;
     bool destroyed;
 
     private void Start()
@@ -22,8 +23,8 @@ public class Skill : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(flipRight ? Vector3.right : Vector3.left * Time.deltaTime * 30);
-        if (Vector2.Distance(initialPosition, transform.position) >= 50) //set skill range
+        transform.Translate(flipRight ? Vector3.right : Vector3.left * Time.deltaTime * speed);
+        if (Vector2.Distance(initialPosition, transform.position) >= 30) //set skill range
         {
             destroyed = true;
         }
