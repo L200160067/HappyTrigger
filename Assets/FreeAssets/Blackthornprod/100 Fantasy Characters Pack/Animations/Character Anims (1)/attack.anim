@@ -638,6 +638,7 @@ AnimationClip:
     flags: 16
   - serializedVersion: 2
     curve:
+
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3

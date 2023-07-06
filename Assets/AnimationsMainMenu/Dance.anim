@@ -370,6 +370,7 @@ AnimationClip:
         value: {x: 0, y: 0, z: -154.153}
         inSlope: {x: 0, y: 0, z: -4.7059274}
         outSlope: {x: 0, y: 0, z: -4.7059274}
+
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
