@@ -3160,7 +3160,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0,
+  mNoiseOffsets: {x: 0, y: 0,, z: 0;}
 --- !u!1001 &253694690
 PrefabInstance:
   m_ObjectHideFlags: 0
