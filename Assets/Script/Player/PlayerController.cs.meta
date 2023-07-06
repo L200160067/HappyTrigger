@@ -3,7 +3,10 @@ guid: 7ab3040f2729ce44989bfb0af7057b98
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb2D: {instanceID: 0}
+  - container: {instanceID: 0}
+  - skillCastAt: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb2D;
+    [NonSerialized]
+    public Rigidbody2D rb2D;
+    public GameObject container, skillCastAt;
     Animator anim;
     PlayerHealth playerHealth;
-    [SerializeField]
-    private bool isJumping, isAttacking, isGrounded;
-    [SerializeField]
-    private float jumpForce = 20f, moveSpeed = 5f;
-    [SerializeField]
-    private int score;
+    public bool isJumping, isAttacking, isGrounded;
+    bool isSkillCD;
+    float moveHorizontal, CDSkillContainer;
+    public float jumpForce = 20f, moveSpeed = 5f, knockbackPower = 5f, skillCD = 5f;
+    public int attackPower = 10, defense, score;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
+
+        CDSkillContainer = skillCD;
     }
 
     // Update is called once per frame
@@ -42,17 +45,19 @@ public class PlayerController : MonoBehaviour
 
     void Run()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
+        moveHorizontal = isAttacking ? 0 : Input.GetAxis("Horizontal"); // prevent player to flip while attacking
         rb2D.velocity = new Vector2(moveHorizontal * moveSpeed, rb2D.velocity.y);
 
         anim.SetBool("isRun", moveHorizontal != 0 && !isJumping && isGrounded ? true : false);
-        if (moveHorizontal > 0)
+        if (moveHorizontal > 0) // flip right
         {
-            transform.localScale = new Vector2(2, 2);
+            transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
+            knockbackPower = knockbackPower < 0 ? -knockbackPower : knockbackPower;
         }
-        else if (moveHorizontal < 0)
+        else if (moveHorizontal < 0) // flip left
         {
-            transform.localScale = new Vector2(-2, 2);
+            transform.localScale = new Vector2(transform.localScale.x < 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
+            knockbackPower = knockbackPower > 0 ? -knockbackPower : knockbackPower;
         }
     }
 
@@ -69,14 +74,49 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack");
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && isGrounded)
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") || anim.GetCurrentAnimatorStateInfo(0).IsName("Skill");
+        if (!isAttacking && isGrounded)
         {
-            anim.SetTrigger("attack");
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                anim.SetTrigger("attack"); // normal attack
+            }
+            if (Input.GetKeyDown(KeyCode.E) && !isSkillCD)
+            {
+                anim.SetTrigger("skill"); // launch skill
+                isSkillCD = true;
+            }
+        }
+        if (isSkillCD)
+        {
+            StartCoroutine(SkillCooldown());
+        }
+        rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
+    }
+    void Skill(GameObject magicSkill) // method for Animation Event
+    {
+        if (!magicSkill.GetComponent<Skill>())
+        {
+            magicSkill.AddComponent<Skill>();
+        }
+        if (transform.localScale.x > 0)
+        {
+            Instantiate(magicSkill, skillCastAt.transform.position, Quaternion.identity, container != null ? container.transform : null);
+        }
+        else if (transform.localScale.x < 0)
+        {
+            Instantiate(magicSkill, skillCastAt.transform.position, Quaternion.identity, container != null ? container.transform : null);
         }
 
-        rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
-
+    }
+    IEnumerator SkillCooldown()
+    {
+        skillCD = skillCD - Time.deltaTime;
+        yield return new WaitUntil(() => skillCD <= 0);
+        skillCD = CDSkillContainer;
+        yield return null;
+        Debug.Log("Skill not CD");
+        isSkillCD = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -95,15 +135,17 @@ public class PlayerController : MonoBehaviour
         // }
     }
 
-    /*Ground Check*/
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        isGrounded = other.gameObject.CompareTag("Ground");
+        // damage the enemy
+        // if (other.gameObject.CompareTag("Enemy"))
+        // {
+        //     other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
+        //     Debug.Log("Enemy get damage");
+        // }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground") == true)
-            isGrounded = false;
     }
 
 

@@ -5,14 +5,11 @@ using UnityEngine;
 
 public class MovingGround : MonoBehaviour
 {
-    // private Transform position; 
     [SerializeField]
     private float waitDuration, speed;
     [SerializeField]
     private Transform[] targetDestination;
-    [SerializeField]
-    private bool useWait = false;
-    private bool isArrive = false;
+    private bool isArrive = false, isWaitting = false;
     private int i;
 
     void Start()
@@ -37,9 +34,24 @@ public class MovingGround : MonoBehaviour
 
     IEnumerator Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetDestination[i].position, speed * Time.deltaTime);
+        if (!isWaitting)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetDestination[i].position, speed * Time.deltaTime);
+        }
         yield return new WaitUntil(() => isArrive);
+        isWaitting = true;
         yield return new WaitForSeconds(waitDuration);
+        isWaitting = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.position.y + 0.4f > transform.position.y)
+            other.transform.SetParent(transform);
+    }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        other.transform.SetParent(null);
     }
 
 }
