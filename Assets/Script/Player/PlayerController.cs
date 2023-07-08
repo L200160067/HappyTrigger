@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         }
         isJumping = rb2D.velocity.y > 0 && !isGrounded; // return boolean untuk isJumping
         anim.SetBool("isJump", isJumping);
+        anim.SetBool("isFall", !isGrounded);
 
     }
 

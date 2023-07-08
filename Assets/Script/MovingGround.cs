@@ -46,7 +46,7 @@ public class MovingGround : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.transform.position.y + 0.4f > transform.position.y)
+        if (other.transform.position.y + 0.5f > transform.position.y)
             other.transform.SetParent(transform);
     }
     private void OnCollisionExit2D(Collision2D other)
