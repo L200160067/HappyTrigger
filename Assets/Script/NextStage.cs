@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeStage : MonoBehaviour
+public class NextStage : MonoBehaviour
 {
-    [SerializeField]
-    string changeSceneTo;
+    LoadScene loadScene;
+
+
+    private void Start()
+    {
+        loadScene = FindObjectOfType<LoadScene>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(changeSceneTo);
+            loadScene.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
