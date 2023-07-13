@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
-    PlayerController player;
+    PlayerStats player;
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerStats>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

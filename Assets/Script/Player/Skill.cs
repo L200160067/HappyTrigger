@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    PlayerController player;
+    PlayerController playerController;
+    PlayerStats playerStats;
     Enemy enemy;
     Vector2 initialPosition;
     [NonSerialized]
@@ -15,15 +16,16 @@ public class Skill : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
+        playerStats = FindObjectOfType<PlayerStats>();
         initialPosition = transform.position;
-        flipRight = player.transform.localScale.x > 0 ? true : false;
+        flipRight = playerController.transform.localScale.x > 0 ? true : false;
         transform.localScale = new Vector2(flipRight ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
 
     }
     private void Update()
     {
-        transform.Translate(flipRight ? Vector3.right : Vector3.left * Time.deltaTime * speed);
+        transform.Translate(flipRight ? Vector3.right * Time.fixedDeltaTime * speed : Vector3.left * Time.fixedDeltaTime * speed);
         if (Vector2.Distance(initialPosition, transform.position) >= 30) //set skill range
         {
             destroyed = true;
@@ -52,7 +54,7 @@ public class Skill : MonoBehaviour
             // damage the enemy
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<Enemy>().TakeDamage(player.attackPower, player.knockbackPower);
+                other.gameObject.GetComponent<Enemy>().TakeDamage(playerStats.attackPower, playerStats.knockbackPower);
                 destroyed = true;
                 Debug.Log("Enemy get damage by skill");
             }

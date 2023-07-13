@@ -100,12 +100,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2539225549899715523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94083b316da32a94180515c35bc58406, type: 3}
+  m_Script: {fileID: 11500000, guid: f9bee2b6af6c0c34094052ecc2e09eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isAlive: 1
-  health: 100
-  fallingDMGThreshold: 30
+  health: 0
+  mana: 0
+  maxHealth: 100
+  maxMana: 100
+  attackPower: 10
+  defense: 0
+  score: 0
+  fallingDMGThreshold: 20
+  knockbackPower: 5
+  skillCD: 5
 --- !u!114 &3773172293463175503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,11 +133,7 @@ MonoBehaviour:
   isGrounded: 0
   jumpForce: 20
   moveSpeed: 14
-  knockbackPower: 5
-  skillCD: 5
-  attackPower: 10
-  defense: 0
-  score: 0
+  skillMana: 30
 --- !u!70 &2063292300678573226
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

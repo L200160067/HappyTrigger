@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int scoreValue = 1; // nilai score item yg didapat
+    public bool isScoreItem = true;
+    public int mana = 20;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,10 +15,17 @@ public class Item : MonoBehaviour
 
     private void CollectItem()
     {
-        PlayerController playerController = FindObjectOfType<PlayerController>();
-        if (playerController != null)
+        PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+        if (playerStats != null)
         {
-            playerController.IncreaseScore(scoreValue);
+            if (isScoreItem)
+            {
+                FindFirstObjectByType<UI>().IncreaseScore(gameObject.tag);
+            }
+            else
+            {
+                playerStats.mana += mana;
+            }
         }
         Destroy(gameObject);
     }

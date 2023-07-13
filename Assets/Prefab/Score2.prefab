@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7796644738934932563}
   - component: {fileID: 7929997053029317202}
   m_Layer: 0
-  m_Name: gem_4
-  m_TagString: Item
+  m_Name: Score2
+  m_TagString: Score2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 23fc6487bbe36c243a399785ba582eef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcb9919dba501554cbacee6d2fb49049, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.65, y: 1.24}
+    oldSize: {x: 1.24, y: 1.65}
     newSize: {x: 1.65, y: 1.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -143,4 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45f90a2216d3f14d94138b8e9a8bf89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  isScoreItem: 1
+  mana: 20

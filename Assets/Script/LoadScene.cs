@@ -24,7 +24,7 @@ public class LoadScene : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         while (!operation.isDone)
         {
-            loadingSlider.value = Mathf.Clamp01(operation.progress / .9f);
+            loadingSlider.value = operation.progress;
             yield return null;
         }
 

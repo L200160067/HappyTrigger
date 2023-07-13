@@ -8,6 +8,8 @@ TagManager:
   - Item
   - Enemy
   - PlayerCollider
+  - Score1
+  - Score2
   layers:
   - Default
   - TransparentFX

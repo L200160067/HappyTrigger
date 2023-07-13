@@ -9,29 +9,29 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb2D;
     public GameObject container, skillCastAt;
     Animator anim;
-    PlayerHealth playerHealth;
+    PlayerStats playerStats;
     public bool isJumping, isAttacking, isGrounded;
-    bool isSkillCD;
+    // bool isSkillCD;
     float moveHorizontal, CDSkillContainer;
-    public float jumpForce = 20f, moveSpeed = 5f, knockbackPower = 5f, skillCD = 5f;
-    public int attackPower = 10, defense, score;
+    public float jumpForce = 20f, moveSpeed = 5f;
+    public int skillMana = 30;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        playerHealth = GetComponent<PlayerHealth>();
+        playerStats = GetComponent<PlayerStats>();
         rb2D = GetComponent<Rigidbody2D>();
         /*Change the gravity scale*/
         rb2D.gravityScale = 3f;
 
-        CDSkillContainer = skillCD;
+        CDSkillContainer = playerStats.skillCD;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth.isAlive)
+        if (playerStats.isAlive)
         {
             Run();
             Jump();
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y <= -35f)
         {
-            playerHealth.health = 0;
+            playerStats.health = 0;
         }
     }
 
@@ -52,12 +52,12 @@ public class PlayerController : MonoBehaviour
         if (moveHorizontal > 0) // flip right
         {
             transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
-            knockbackPower = knockbackPower < 0 ? -knockbackPower : knockbackPower;
+            playerStats.knockbackPower = playerStats.knockbackPower < 0 ? -playerStats.knockbackPower : playerStats.knockbackPower;
         }
         else if (moveHorizontal < 0) // flip left
         {
             transform.localScale = new Vector2(transform.localScale.x < 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
-            knockbackPower = knockbackPower > 0 ? -knockbackPower : knockbackPower;
+            playerStats.knockbackPower = playerStats.knockbackPower > 0 ? -playerStats.knockbackPower : playerStats.knockbackPower;
         }
     }
 
@@ -82,16 +82,17 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("attack"); // normal attack
             }
-            if (Input.GetKeyDown(KeyCode.E) && !isSkillCD)
+            if (Input.GetKeyDown(KeyCode.E) /*&& !isSkillCD */&& playerStats.mana > skillMana)
             {
                 anim.SetTrigger("skill"); // launch skill
-                isSkillCD = true;
+                // isSkillCD = true;
+                playerStats.mana -= skillMana;
             }
         }
-        if (isSkillCD)
-        {
-            StartCoroutine(SkillCooldown());
-        }
+        // if (isSkillCD)
+        // {
+        //     StartCoroutine(SkillCooldown());
+        // }
         rb2D.constraints = isAttacking ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation; // prevent player can move while attacking
     }
     void Skill(GameObject magicSkill) // method for Animation Event
@@ -110,60 +111,14 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    IEnumerator SkillCooldown()
-    {
-        skillCD = skillCD - Time.deltaTime;
-        yield return new WaitUntil(() => skillCD <= 0);
-        skillCD = CDSkillContainer;
-        yield return null;
-        Debug.Log("Skill not CD");
-        isSkillCD = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("Item"))
-        {
-            CollectItem(collision.gameObject);
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // if (collision.gameObject.CompareTag("Ground"))
-        // {
-        //     isGrounded = false;
-        // }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // damage the enemy
-        // if (other.gameObject.CompareTag("Enemy"))
-        // {
-        //     other.gameObject.GetComponent<Enemy>().TakeDamage(attackPower, knockbackPower);
-        //     Debug.Log("Enemy get damage");
-        // }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-    }
-
-
-
-    private void CollectItem(GameObject item)
-    {
-        IncreaseScore(1);
-
-        Destroy(item);
-    }
-
-
-    public void IncreaseScore(int value)
-    {
-        score += value;
-        Debug.Log("Score: " + score);
-    }
-
+    // IEnumerator SkillCooldown()
+    // {
+    //     playerStats.skillCD = playerStats.skillCD - Time.deltaTime;
+    //     yield return new WaitUntil(() => playerStats.skillCD <= 0);
+    //     playerStats.skillCD = CDSkillContainer;
+    //     yield return null;
+    //     Debug.Log("Skill not CD");
+    //     isSkillCD = false;
+    // }
 
 }

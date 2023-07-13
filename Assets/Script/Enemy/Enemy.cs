@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 20, damage = 1, knockbackPower, speed = 4;
-    public float attackCD = 2f;
+    public int health = 20, damage = 10, knockbackPower, speed = 4;
+    public float attackCD = 2f, rangeToAtk = 3.5f;
     [NonSerialized]
-    public bool playerDetected, isAttacking;
+    public bool playerDetected, outsideDetector, isAttacking;
     bool isCD = false;
     float Cooldown = 0;
     Transform target;
@@ -56,9 +56,9 @@ public class Enemy : MonoBehaviour
     {
         float playerDistanceX = Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(target.position.x, 0));
         float playerDistanceY = Vector2.Distance(new Vector2(0, transform.position.y), new Vector2(0, target.position.y));
-        if (FindObjectOfType<PlayerHealth>().isAlive)
+        if (FindObjectOfType<PlayerStats>().isAlive)
         {
-            if (playerDetected && playerDistanceX > 3)
+            if (playerDetected && playerDistanceX >= rangeToAtk)
             {
                 anim.SetBool("isMoving", true);
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
                     transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
                 }
             }
-            else if (playerDistanceX < 3.5f && playerDistanceY < 3f)
+            else if (playerDistanceX < rangeToAtk && playerDistanceY < 5f)
             {
                 Attack();
                 anim.SetBool("isMoving", false);
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("isMoving", false);
             }
-            if (Vector2.Distance(transform.position, target.position) > 20 && playerDetected)
+            if ((Vector2.Distance(transform.position, target.position) > 20 || outsideDetector) && playerDetected)
             {
                 playerDetected = false;
             }
@@ -101,9 +101,9 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<PlayerHealth>().isAlive)
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<PlayerStats>().isAlive)
         {
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage, knockbackPower);
+            other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage, knockbackPower);
         }
     }
 
