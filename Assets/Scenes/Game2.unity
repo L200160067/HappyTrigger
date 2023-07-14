@@ -1567,6 +1567,7 @@ MonoBehaviour:
   knockbackPower: 0
   speed: 4
   attackCD: 2
+  rangeToAtk: 3.5
 --- !u!1 &106446276
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,6 +5409,7 @@ MonoBehaviour:
   knockbackPower: 0
   speed: 4
   attackCD: 2
+  rangeToAtk: 3.5
 --- !u!1001 &421997647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7527,6 +7529,7 @@ MonoBehaviour:
   knockbackPower: 0
   speed: 4
   attackCD: 2
+  rangeToAtk: 3.5
 --- !u!1 &768016929
 GameObject:
   m_ObjectHideFlags: 0
@@ -8440,7 +8443,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -46
+  m_SortingOrder: -49
   m_Sprite: {fileID: 21300064, guid: 6167b5d3cb29d52488e611c0cb2a074c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10378,6 +10381,7 @@ MonoBehaviour:
   knockbackPower: 0
   speed: 4
   attackCD: 2
+  rangeToAtk: 3.5
 --- !u!1 &1110254373
 GameObject:
   m_ObjectHideFlags: 0
@@ -11060,7 +11064,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -46
+  m_SortingOrder: -49
   m_Sprite: {fileID: 21300064, guid: 6167b5d3cb29d52488e611c0cb2a074c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14096,7 +14100,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -46
+  m_SortingOrder: -49
   m_Sprite: {fileID: 21300064, guid: 6167b5d3cb29d52488e611c0cb2a074c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -17945,6 +17949,7 @@ MonoBehaviour:
   knockbackPower: 0
   speed: 4
   attackCD: 2
+  rangeToAtk: 3.5
 --- !u!1001 &1968901436
 PrefabInstance:
   m_ObjectHideFlags: 0

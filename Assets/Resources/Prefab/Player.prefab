@@ -110,7 +110,6 @@ MonoBehaviour:
   maxMana: 100
   attackPower: 10
   defense: 0
-  score: 0
   fallingDMGThreshold: 20
   knockbackPower: 5
   skillCD: 5
@@ -226,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5219594826128859348}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: casting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 670366282388849139, guid: dde2588f5e0bc7b4ab407c1ae99bd5c1, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2056682395419792543, guid: dde2588f5e0bc7b4ab407c1ae99bd5c1, type: 3}
       propertyPath: m_Layer

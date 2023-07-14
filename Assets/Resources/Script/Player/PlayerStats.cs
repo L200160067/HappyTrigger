@@ -58,7 +58,7 @@ public class PlayerStats : MonoBehaviour
         int fallingDamage = Mathf.RoundToInt(velocityY - fallingDMGThreshold) / 2; //Perhitungan damage ketika jatuh
         if (collision.relativeVelocity.y > fallingDMGThreshold && isAlive)
         {
-            TakeDamage(fallingDamage);
+            // TakeDamage(fallingDamage);
         }
     }
 

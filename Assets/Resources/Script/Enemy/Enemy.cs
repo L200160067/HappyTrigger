@@ -13,12 +13,16 @@ public class Enemy : MonoBehaviour
     float Cooldown = 0;
     Transform target;
     Animator anim;
+    GameObject score2;
 
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim = GetComponent<Animator>();
+        GetComponent<CapsuleCollider2D>().excludeLayers = LayerMask.GetMask("Player");
+        score2 = Instantiate(Resources.Load<GameObject>("Prefab/score2"), transform.position, Quaternion.identity);
+        score2.SetActive(false);
     }
 
     private void Update()
@@ -48,7 +52,7 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         Cooldown = Cooldown - Time.deltaTime;
-        yield return new WaitUntil(() => isCD == false);
+        yield return new WaitWhile(() => isCD);
         Cooldown = 0;
     }
 
@@ -62,6 +66,25 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("isMoving", true);
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
+                Flip();
+            }
+            else if (playerDistanceX < rangeToAtk && playerDistanceY < 5f)
+            {
+                Attack();
+                anim.SetBool("isMoving", false);
+                Flip();
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
+            if ((Vector2.Distance(transform.position, target.position) > 20 && outsideDetector) && playerDetected)
+            {
+                playerDetected = false;
+            }
+
+            void Flip()
+            {
                 if (target.position.x > transform.position.x)
                 {
                     transform.localScale = new Vector2(transform.localScale.x < 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
@@ -71,24 +94,13 @@ public class Enemy : MonoBehaviour
                     transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);
                 }
             }
-            else if (playerDistanceX < rangeToAtk && playerDistanceY < 5f)
-            {
-                Attack();
-                anim.SetBool("isMoving", false);
-            }
-            else
-            {
-                anim.SetBool("isMoving", false);
-            }
-            if ((Vector2.Distance(transform.position, target.position) > 20 || outsideDetector) && playerDetected)
-            {
-                playerDetected = false;
-            }
         }
     }
 
     void Die()
     {
+        score2.transform.position = transform.position;
+        score2.SetActive(true);
         Destroy(gameObject);
     }
 
