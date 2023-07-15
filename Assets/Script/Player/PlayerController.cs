@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             Jump();
             Attack();
         }
-        if (transform.position.y <= -35f)
+        if (transform.position.y <= -100f)
         {
             playerHealth.health = 0;
         }
