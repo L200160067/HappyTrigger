@@ -15,9 +15,16 @@ public class NextStage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && FindObjectOfType<UI>().taskComplete)
+        if (other.gameObject.CompareTag("Player"))
         {
-            loadScene.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (FindObjectOfType<UI>().taskComplete)
+            {
+                loadScene.ChangeScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+                Debug.Log("Task doesn't complete");
+            }
         }
     }
 }
