@@ -2122,7 +2122,7 @@ Transform:
   - {fileID: 1425770300}
   - {fileID: 68927117}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152576213
 GameObject:
@@ -3833,8 +3833,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-<<<<<<< Updated upstream
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 292922892}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &279017428 stripped
@@ -4018,7 +4017,7 @@ Transform:
   - {fileID: 278569561}
   - {fileID: 932929798}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &305561852 stripped
 Transform:
@@ -4487,7 +4486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7354914549832202206, guid: 31ec9dced0683e145b1f81b43bd5f4db, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7354914549832202206, guid: 31ec9dced0683e145b1f81b43bd5f4db, type: 3}
       propertyPath: m_LocalScale.x
@@ -6167,7 +6166,7 @@ Transform:
   m_Children:
   - {fileID: 1608907808}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &517566921
 PrefabInstance:
@@ -6437,7 +6436,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &536922085
 GameObject:
@@ -6621,7 +6620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8474773626743486533, guid: 7c9f7c447a6173545a4380a4f7516171, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8474773626743486533, guid: 7c9f7c447a6173545a4380a4f7516171, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8327,7 +8326,7 @@ Transform:
   - {fileID: 174772090}
   - {fileID: 37926124}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &824574267
 PrefabInstance:
@@ -9195,8 +9194,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-<<<<<<< Updated upstream
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 292922892}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936725643
@@ -12018,7 +12016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1252265580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12184,8 +12182,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-<<<<<<< Updated upstream
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 292922892}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1266363650
@@ -16591,7 +16588,7 @@ Transform:
   m_Children:
   - {fileID: 1028859518}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1666980565
 GameObject:
@@ -16876,7 +16873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7118981445111059900, guid: 39c86dd787dbdd046a0e7963c1520409, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7118981445111059900, guid: 39c86dd787dbdd046a0e7963c1520409, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17120,7 +17117,7 @@ Transform:
   - {fileID: 1106168395}
   - {fileID: 411882841}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1737163003
 GameObject:
@@ -17276,7 +17273,7 @@ Transform:
   m_Children:
   - {fileID: 247950913}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1796244124
 GameObject:

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     PlayerController player;
     Animator anim;
     Image healthBar, manaBar;
+    LoadScene loadScene;
     public bool isAlive = true;
     public int health, mana;
     public int maxHealth = 100, maxMana = 100, attackPower = 10, defense;
@@ -23,6 +25,7 @@ public class PlayerStats : MonoBehaviour
         mana = maxMana;
         healthBar = FindObjectOfType<UI>().healthBar;
         manaBar = FindObjectOfType<UI>().manaBar;
+        loadScene = FindObjectOfType<LoadScene>();
     }
 
     private void Update()
@@ -38,16 +41,23 @@ public class PlayerStats : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            Die();
             isAlive = false;
         }
+        if (!isAlive)
+        {
+            Die();
+        }
+
     }
 
-    public void Die()
+    async void Die()
     {
         anim.SetTrigger("die");
         Debug.Log("Player is died!");
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+        await Task.Delay(2000);
+        if (loadScene != null)
+            loadScene.ChangeScene(1);
     }
 
     /* Fall Damage */
