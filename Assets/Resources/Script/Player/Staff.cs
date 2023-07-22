@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Staff : MonoBehaviour
 {
+    [SerializeField] AudioSource bonkSfx;
     PlayerStats player;
 
     private void Start()
@@ -15,6 +16,7 @@ public class Staff : MonoBehaviour
         // damage the enemy
         if (other.gameObject.CompareTag("Enemy"))
         {
+            bonkSfx.Play();
             other.gameObject.GetComponent<Enemy>().TakeDamage(player.attackPower, player.knockbackPower);
             Debug.Log("Enemy get damage");
         }

@@ -10,6 +10,13 @@ public class LoadScene : MonoBehaviour
     public Animator transition;
     public GameObject loadingScreen;
     public Slider loadingSlider;
+    public bool isTransitioning;
+    public static LoadScene Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     public void ChangeScene(int sceneIndex = -1)
     {
@@ -18,6 +25,7 @@ public class LoadScene : MonoBehaviour
 
     IEnumerator LoadLevel(int sceneIndex)
     {
+        isTransitioning = true;
         transition.SetTrigger("transitionIn");
         yield return new WaitForSeconds(1);
         loadingScreen.SetActive(true);

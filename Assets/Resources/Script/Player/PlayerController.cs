@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject container, skillCastAt;
     Animator anim;
     PlayerStats playerStats;
+    [SerializeField] AudioSource walkSfx;
     public bool isJumping, isAttacking, isGrounded;
     // bool isSkillCD;
     float moveHorizontal, CDSkillContainer;
@@ -49,6 +50,14 @@ public class PlayerController : MonoBehaviour
         rb2D.velocity = new Vector2(moveHorizontal * moveSpeed, rb2D.velocity.y);
 
         anim.SetBool("isRun", moveHorizontal != 0 && !isJumping && isGrounded ? true : false);
+        if (anim.GetBool("isRun"))
+        {
+            walkSfx.UnPause();
+        }
+        else
+        {
+            walkSfx.Pause();
+        }
         if (moveHorizontal > 0) // flip right
         {
             transform.localScale = new Vector2(transform.localScale.x > 0 ? transform.localScale.x : -transform.localScale.x, transform.localScale.y);

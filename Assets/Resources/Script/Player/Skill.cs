@@ -53,7 +53,7 @@ public class Skill : MonoBehaviour
             // damage the enemy
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<Enemy>().TakeDamage(playerStats.attackPower * 2, playerStats.knockbackPower);
+                other.gameObject.GetComponent<Enemy>().TakeDamage(playerStats.attackPower * 3, playerStats.knockbackPower);
                 destroyed = true;
                 Debug.Log("Enemy get damage by skill");
             }
