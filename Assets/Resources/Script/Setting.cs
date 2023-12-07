@@ -14,7 +14,7 @@ public class Setting : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -58,6 +58,6 @@ public class Setting : MonoBehaviour
     public void Pause()
     {
         gameObject.SetActive(true);
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
     }
 }

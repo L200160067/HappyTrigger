@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+// sing UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class UI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Pause();
         if (maxScore1 != 0)
             score1Bar.fillAmount = (float)score1 / (float)maxScore1;
         if (maxScore2 != 0)
@@ -47,6 +50,6 @@ public class UI : MonoBehaviour
 
     public void Pause()
     {
-        FindAnyObjectByType<Setting>(FindObjectsInactive.Include).Pause();
+        FindAnyObjectByType<Setting>(FindObjectsInactive.Include).gameObject.SetActive(true);
     }
 }

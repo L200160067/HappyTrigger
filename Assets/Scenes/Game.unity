@@ -15203,11 +15203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997710130861172680, guid: b23628218b396c6468cb4a755d5ae239, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.156025
+      value: -34.15603
       objectReference: {fileID: 0}
     - target: {fileID: 8217657462094929233, guid: b23628218b396c6468cb4a755d5ae239, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.156025
+      value: -34.15603
       objectReference: {fileID: 0}
     - target: {fileID: 8494456375923523266, guid: b23628218b396c6468cb4a755d5ae239, type: 3}
       propertyPath: player

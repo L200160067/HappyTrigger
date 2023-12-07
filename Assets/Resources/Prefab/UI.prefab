@@ -66,7 +66,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &3007505012028196630
 MonoBehaviour:
@@ -597,8 +597,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1186872429921821049}
-        m_TargetAssemblyTypeName: Setting, Assembly-CSharp
+      - m_Target: {fileID: 502226766364261608}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
@@ -2259,17 +2259,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18497ad9df3c5034a8f4202daf703918, type: 3}
---- !u!114 &1186872429921821049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3399831939925309687, guid: 18497ad9df3c5034a8f4202daf703918, type: 3}
-  m_PrefabInstance: {fileID: 4563904598132627854}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b10a2cc3f9508614199ebb5c35ea94a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3757921348770261612 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 824420979411874786, guid: 18497ad9df3c5034a8f4202daf703918, type: 3}
